@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="NOIR INK STUDIO · Estudio de tatuaje profesional en Granada. Realismo, blackwork, neo-traditional, japonés. Artistas especializados, cita previa.">
+<title>NOIR INK STUDIO · Tatuajes en Granada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* =====================================================
+   NOIR INK STUDIO — CSS
+   ===================================================== */
+:root {
+  --black:    #080808;
+  --ink:      #0E0E0E;
+  --ink-2:    #141414;
+  --ink-3:    #1C1C1C;
+  --red:      #C8102E;
+  --red-dim:  rgba(200,16,46,.13);
+  --gold:     #B8960C;
+  --gold-dim: rgba(184,150,12,.13);
+  --cream:    #F2EDE6;
+  --text:     #BDB8B1;
+  --muted:    #6A6460;
+  --border:   rgba(255,255,255,.07);
+  --f-disp:   'Cinzel', serif;
+  --f-ser:    'Playfair Display', Georgia, serif;
+  --f-sans:   'Inter', system-ui, sans-serif;
+  --ease:     cubic-bezier(.16,1,.3,1);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px;overflow-x:hidden}
+body{font-family:var(--f-sans);background:var(--black);color:var(--text);overflow-x:hidden;line-height:1.65}
+img,video{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+/* ── REVEAL ANIMATIONS ── */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+.reveal-scale{opacity:0;transform:scale(.9);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal-scale.visible{opacity:1;transform:scale(1)}
+
+/* ── LOADER ── */
+#loader{
+  position:fixed;inset:0;background:var(--black);z-index:9999;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;
+}
+.loader-name{
+  font-family:var(--f-disp);font-size:clamp(1.5rem,5vw,2.75rem);
+  font-weight:700;letter-spacing:.35em;color:var(--cream);
+  opacity:0;animation:fadeUp .8s var(--ease) .2s forwards;
+}
+.loader-sub{
+  font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;color:var(--muted);
+  opacity:0;animation:fadeUp .6s var(--ease) .6s forwards;
+}
+.loader-bar{width:160px;height:1px;background:rgba(255,255,255,.1);overflow:hidden;margin-top:.5rem}
+.loader-fill{height:100%;background:var(--red);width:0;animation:barFill 1.6s var(--ease) .4s forwards}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes barFill{to{width:100%}}
+
+/* ── BANNER ── */
+#banner{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:var(--ink-2);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;gap:1.5rem;
+  padding:.5rem 1.5rem;font-size:.75rem;letter-spacing:.08em;
+  color:var(--muted);
+}
+#banner a{color:var(--cream);font-weight:600;transition:color .2s}
+#banner a:hover{color:var(--red)}
+.ban-dot{width:6px;height:6px;border-radius:50%;background:var(--red);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+
+/* ── NAVBAR ── */
+#navbar{
+  position:fixed;top:32px;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.25rem 3rem;transition:background .4s,padding .4s,border-color .4s;
+  border-bottom:1px solid transparent;
+}
+#navbar.scrolled{
+  background:rgba(8,8,8,.96);backdrop-filter:blur(16px);
+  padding:.875rem 3rem;border-color:var(--border);
+}
+.nav-logo{
+  font-family:var(--f-disp);font-size:1.125rem;font-weight:700;
+  letter-spacing:.3em;color:var(--cream);display:flex;align-items:center;gap:.875rem;
+}
+.nav-logo-line{width:24px;height:1px;background:var(--red)}
+.nav-logo span{font-weight:400;font-size:.75rem;letter-spacing:.2em;color:var(--muted)}
+.nav-links{display:flex;list-style:none;gap:2.5rem}
+.nav-links a{
+  font-size:.75rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);transition:color .25s;position:relative;
+}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--red);transition:width .3s var(--ease)}
+.nav-links a:hover{color:var(--cream)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{
+  padding:.625rem 1.5rem;background:var(--red);color:#fff;
+  font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  border-radius:2px;transition:background .25s,transform .25s;
+}
+.nav-cta:hover{background:#e01830;transform:translateY(-1px)}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:101}
+.burger span{display:block;width:22px;height:1.5px;background:var(--cream);transition:all .3s var(--ease)}
+.burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+/* ── HERO VIDEO ── */
+.hero-video{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;z-index:0;
+}
+.hero-video-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(
+    to right,
+    rgba(8,8,8,.80) 0%,
+    rgba(8,8,8,.50) 55%,
+    rgba(8,8,8,.20) 100%
+  );
+}
+
+/* ── HERO ── */
+#hero{
+  position:relative;min-height:100vh;display:flex;align-items:center;
+  background:var(--black);overflow:hidden;padding-top:5rem;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(255,255,255,.025) 60px),
+    repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(255,255,255,.025) 60px);
+}
+.hero-glow{
+  position:absolute;right:-15%;top:50%;transform:translateY(-50%);z-index:2;
+  width:min(70vw,700px);height:min(70vw,700px);border-radius:50%;
+  background:radial-gradient(circle,rgba(200,16,46,.07) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-circle-deco{
+  position:absolute;right:8%;top:50%;transform:translateY(-50%);z-index:2;
+  width:clamp(280px,38vw,520px);height:clamp(280px,38vw,520px);
+  border-radius:50%;
+  border:1px solid rgba(200,16,46,.2);
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;
+}
+.hero-circle-deco::before{
+  content:'';position:absolute;inset:20px;border-radius:50%;
+  border:1px dashed rgba(255,255,255,.06);
+}
+.hero-circle-deco::after{
+  content:'';position:absolute;inset:50px;border-radius:50%;
+  border:1px solid rgba(200,16,46,.1);
+}
+.hero-flash{
+  font-family:var(--f-disp);font-size:clamp(3rem,8vw,7rem);
+  font-weight:900;letter-spacing:.05em;color:rgba(200,16,46,.06);
+  user-select:none;position:absolute;
+}
+.hero-content{
+  position:relative;z-index:3;padding:4rem 3rem 4rem;max-width:680px;
+}
+.hero-eyebrow{
+  display:flex;align-items:center;gap:.75rem;
+  font-size:.7rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--red);margin-bottom:2rem;
+}
+.hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--red)}
+.hero-title{
+  font-family:var(--f-ser);font-size:clamp(3rem,7vw,5.5rem);
+  font-weight:700;line-height:1.05;color:var(--cream);margin-bottom:1.5rem;
+}
+.hero-title em{font-style:italic;color:var(--red)}
+.hero-desc{
+  font-size:1rem;font-weight:300;color:var(--muted);
+  line-height:1.8;max-width:480px;margin-bottom:2.5rem;
+}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:.625rem;
+  padding:.875rem 2rem;background:var(--red);color:#fff;
+  font-size:.8125rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  border-radius:2px;transition:all .3s var(--ease);
+}
+.btn-primary:hover{background:#e01830;transform:translateY(-2px);box-shadow:0 8px 28px rgba(200,16,46,.35)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:.625rem;
+  padding:.875rem 2rem;border:1px solid rgba(255,255,255,.18);color:var(--cream);
+  font-size:.8125rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+  border-radius:2px;transition:all .3s var(--ease);
+}
+.btn-ghost:hover{border-color:var(--red);color:var(--red)}
+.hero-scroll-ind{
+  position:absolute;bottom:2rem;left:3rem;z-index:4;
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.2);
+}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(200,16,46,.5),transparent);animation:scrollDown 2s ease infinite}
+@keyframes scrollDown{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ── MARQUEE ── */
+.marquee-bar{
+  position:relative;z-index:3;background:var(--red);
+  padding:.7rem 0;overflow:hidden;white-space:nowrap;
+}
+.marquee-track{
+  display:inline-flex;gap:2rem;
+  animation:marquee 25s linear infinite;
+  font-family:var(--f-disp);font-size:.75rem;font-weight:600;
+  letter-spacing:.2em;color:rgba(255,255,255,.9);
+}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── SECTION BASE ── */
+.section{padding:7rem 0;position:relative;overflow:hidden}
+.section-dark{background:var(--ink)}
+.section-alt{background:var(--ink-2)}
+.container{max-width:1240px;margin:0 auto;padding:0 3rem}
+.section-head{text-align:center;margin-bottom:4.5rem}
+.tag{
+  display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--red);background:var(--red-dim);
+  padding:.3rem .875rem;border-radius:100px;border:1px solid rgba(200,16,46,.2);
+  margin-bottom:1.25rem;
+}
+.tag-gold{color:var(--gold);background:var(--gold-dim);border-color:rgba(184,150,12,.2)}
+.section-head h2{
+  font-family:var(--f-ser);font-size:clamp(2rem,4vw,3rem);font-weight:700;
+  color:var(--cream);line-height:1.15;margin-bottom:.75rem;
+}
+.section-head h2 em{font-style:italic;color:var(--red)}
+.section-head p{color:var(--muted);font-weight:300;font-size:1rem;max-width:520px;margin:0 auto}
+
+/* ── FILOSOFÍA ── */
+.filosofia-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:6rem;align-items:center}
+.fil-tag{
+  font-family:var(--f-disp);font-size:.65rem;letter-spacing:.35em;
+  text-transform:uppercase;color:var(--red);margin-bottom:1.25rem;display:block;
+}
+.fil-title{
+  font-family:var(--f-ser);font-size:clamp(2rem,4vw,3rem);font-weight:700;
+  color:var(--cream);line-height:1.2;margin-bottom:1.5rem;
+}
+.fil-title em{font-style:italic;color:var(--red)}
+.fil-text{color:var(--muted);font-weight:300;line-height:1.85;margin-bottom:1.25rem;font-size:.9375rem}
+.fil-quote{
+  margin:2rem 0;padding:1.5rem 0 1.5rem 1.5rem;
+  border-left:2px solid var(--red);
+  font-family:var(--f-ser);font-style:italic;font-size:1.0625rem;color:var(--cream);line-height:1.7;
+}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.stat-card{
+  background:var(--ink-3);border:1px solid var(--border);border-radius:8px;
+  padding:2rem 1.5rem;text-align:center;position:relative;overflow:hidden;
+  transition:border-color .3s var(--ease),transform .3s var(--ease);
+}
+.stat-card:hover{border-color:rgba(200,16,46,.3);transform:translateY(-4px)}
+.stat-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--red-dim),transparent);opacity:0;
+  transition:opacity .3s;
+}
+.stat-card:hover::before{opacity:1}
+.stat-num{
+  font-family:var(--f-disp);font-size:2.5rem;font-weight:700;
+  color:var(--red);line-height:1;display:block;margin-bottom:.375rem;
+}
+.stat-label{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.stat-card.accent{border-color:rgba(200,16,46,.25);grid-column:span 2}
+.stat-card.accent .stat-num{color:var(--gold)}
+
+/* ── ESTILOS ── */
+.estilos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.estilo-card{
+  background:var(--ink-2);border:1px solid var(--border);border-radius:8px;
+  padding:2.25rem 2rem;position:relative;overflow:hidden;
+  transition:border-color .35s var(--ease),transform .35s var(--ease);
+  cursor:default;
+}
+.estilo-card:hover{border-color:rgba(200,16,46,.35);transform:translateY(-6px)}
+.estilo-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--red),transparent);transform:scaleX(0);transform-origin:left;
+  transition:transform .4s var(--ease);
+}
+.estilo-card:hover::before{transform:scaleX(1)}
+.estilo-num{
+  font-family:var(--f-disp);font-size:.7rem;letter-spacing:.3em;color:var(--red);
+  opacity:.6;margin-bottom:1.5rem;display:block;
+}
+.estilo-icon{
+  width:52px;height:52px;border-radius:50%;
+  background:var(--red-dim);border:1px solid rgba(200,16,46,.2);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.25rem;font-size:1.5rem;
+}
+.estilo-name{
+  font-family:var(--f-ser);font-size:1.25rem;font-weight:700;
+  color:var(--cream);margin-bottom:.75rem;
+}
+.estilo-desc{font-size:.875rem;color:var(--muted);font-weight:300;line-height:1.7;margin-bottom:1.25rem}
+.estilo-link{
+  font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+  color:var(--red);opacity:0;transform:translateY(4px);transition:all .3s;
+}
+.estilo-card:hover .estilo-link{opacity:1;transform:translateY(0)}
+
+/* ── ARTISTAS ── */
+.artistas-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+.artista-card{
+  background:var(--ink-2);border:1px solid var(--border);border-radius:8px;
+  overflow:hidden;transition:border-color .35s var(--ease),transform .35s var(--ease);
+}
+.artista-card:hover{border-color:rgba(200,16,46,.3);transform:translateY(-6px)}
+.artista-foto{
+  height:260px;display:flex;align-items:flex-end;justify-content:flex-start;
+  padding:1.25rem;position:relative;overflow:hidden;
+}
+.artista-foto::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(8,8,8,.75) 0%,transparent 55%);
+  pointer-events:none;z-index:1;
+}
+.artista-badge{position:relative;z-index:2}
+.artista-avatar{
+  width:100%;height:100%;position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--f-disp);font-size:4rem;font-weight:700;
+  color:rgba(255,255,255,.08);letter-spacing:.1em;
+  user-select:none;
+}
+.artista-badge{
+  position:relative;z-index:2;
+  background:var(--red);color:#fff;font-size:.65rem;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;padding:.3rem .75rem;border-radius:100px;
+}
+.artista-info{padding:1.5rem}
+.artista-name{
+  font-family:var(--f-ser);font-size:1.125rem;font-weight:700;
+  color:var(--cream);margin-bottom:.25rem;
+}
+.artista-spec{font-size:.8rem;color:var(--red);margin-bottom:.75rem;font-weight:500}
+.artista-bio{font-size:.8125rem;color:var(--muted);font-weight:300;line-height:1.65;margin-bottom:1rem}
+.artista-exp{
+  display:flex;align-items:center;gap:.5rem;
+  font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+}
+.artista-exp strong{color:var(--gold);font-size:.875rem;font-weight:700}
+
+/* ── GALERÍA ── */
+.galeria-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1rem;
+  margin-bottom:2.5rem;
+}
+.gal-item{
+  position:relative;overflow:hidden;border-radius:6px;
+  border:1px solid var(--border);cursor:pointer;
+  aspect-ratio:1;
+}
+.gal-item:nth-child(4){grid-column:span 2;aspect-ratio:2/1}
+.gal-item:nth-child(7){grid-column:span 2;aspect-ratio:2/1}
+.gal-bg{
+  position:absolute;inset:0;transition:transform .6s var(--ease);
+}
+.gal-item:hover .gal-bg{transform:scale(1.06)}
+.gal-overlay{
+  position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,.9) 0%,transparent 60%);
+  opacity:0;transition:opacity .35s;display:flex;align-items:flex-end;padding:1.25rem;
+}
+.gal-item:hover .gal-overlay{opacity:1}
+.gal-info{color:#fff}
+.gal-style{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:.25rem;display:block}
+.gal-artist{font-size:.875rem;font-weight:600;color:var(--cream)}
+
+/* Gallery images */
+.gal-img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center;
+  filter:brightness(.62) contrast(1.25) saturate(.55);
+  transition:transform .65s var(--ease),filter .4s;
+}
+.gal-item:hover .gal-img{
+  transform:scale(1.07);
+  filter:brightness(.5) contrast(1.35) saturate(.45);
+}
+.gal-item::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(200,16,46,.08),transparent 60%);
+  pointer-events:none;z-index:1;
+}
+
+/* Artist photos */
+.artista-img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center top;
+  filter:grayscale(25%) brightness(.82) contrast(1.12);
+  transition:transform .55s var(--ease);
+}
+.artista-card:hover .artista-img{transform:scale(1.04)}
+
+/* Placeholder note */
+.gal-placeholder-note{
+  text-align:center;color:var(--muted);font-size:.8125rem;font-weight:300;font-style:italic;
+  padding:.75rem;border:1px dashed rgba(255,255,255,.08);border-radius:4px;
+}
+.galeria-cta{text-align:center;margin-top:2.5rem}
+
+/* ── PROCESO ── */
+.proceso-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;position:relative}
+.proceso-grid::before{
+  content:'';position:absolute;top:2.75rem;left:calc(16.67% + 1rem);right:calc(16.67% + 1rem);
+  height:1px;background:linear-gradient(90deg,transparent,var(--red),transparent);opacity:.4;
+}
+.paso-card{text-align:center;padding:2.5rem 2rem;position:relative}
+.paso-num{
+  width:56px;height:56px;border-radius:50%;
+  background:var(--ink-3);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;
+  font-family:var(--f-disp);font-size:.8rem;font-weight:600;letter-spacing:.15em;color:var(--red);
+  position:relative;z-index:1;transition:background .3s,border-color .3s;
+}
+.paso-card:hover .paso-num{background:var(--red);border-color:var(--red);color:#fff}
+.paso-titulo{
+  font-family:var(--f-ser);font-size:1.1875rem;font-weight:700;
+  color:var(--cream);margin-bottom:.75rem;
+}
+.paso-desc{font-size:.875rem;color:var(--muted);font-weight:300;line-height:1.7}
+.paso-icon{font-size:1.75rem;margin-bottom:.875rem;display:block}
+
+/* ── FAQ ── */
+.faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:.75rem}
+.faq-item{
+  background:var(--ink-2);border:1px solid var(--border);border-radius:6px;overflow:hidden;
+  transition:border-color .3s;
+}
+.faq-item.open{border-color:rgba(200,16,46,.25)}
+.faq-btn{
+  width:100%;display:flex;align-items:center;justify-content:space-between;
+  padding:1.375rem 1.5rem;background:none;border:none;cursor:pointer;
+  text-align:left;gap:1rem;
+}
+.faq-q{font-size:.9375rem;font-weight:500;color:var(--cream)}
+.faq-ico{
+  width:24px;height:24px;border-radius:50%;background:var(--ink-3);
+  border:1px solid var(--border);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;color:var(--red);
+  font-size:1rem;transition:transform .3s var(--ease),background .3s;
+}
+.faq-item.open .faq-ico{transform:rotate(45deg);background:var(--red);color:#fff;border-color:var(--red)}
+.faq-body{max-height:0;overflow:hidden;transition:max-height .4s var(--ease)}
+.faq-body p{padding:.25rem 1.5rem 1.375rem;color:var(--muted);font-weight:300;font-size:.9375rem;line-height:1.75}
+
+/* ── RESEÑAS (placeholder) ── */
+.resenas-nota{
+  text-align:center;padding:2.5rem;background:var(--ink-3);border:1px dashed rgba(200,16,46,.2);
+  border-radius:8px;margin-bottom:2rem;
+}
+.resenas-nota p{color:var(--muted);font-size:.875rem;font-weight:300;line-height:1.7}
+.resenas-nota strong{color:var(--red)}
+.resenas-mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;opacity:.6}
+.resena-mini{
+  background:var(--ink-2);border:1px solid var(--border);border-radius:8px;
+  padding:1.5rem;display:flex;flex-direction:column;gap:.75rem;
+}
+.resena-mini-stars{color:var(--gold);font-size:.875rem;letter-spacing:2px}
+.resena-mini-text{font-size:.8125rem;color:var(--muted);font-style:italic;font-weight:300;line-height:1.65}
+.resena-mini-autor{font-size:.75rem;color:rgba(255,255,255,.3);letter-spacing:.1em}
+.rating-badge{
+  display:inline-flex;align-items:center;gap:.75rem;
+  background:var(--ink-3);border:1px solid rgba(184,150,12,.2);border-radius:100px;
+  padding:.5rem 1.25rem;margin-bottom:2rem;
+}
+.rating-score{font-family:var(--f-disp);font-size:1.5rem;font-weight:700;color:var(--gold);line-height:1}
+.rating-stars{color:var(--gold);letter-spacing:2px;font-size:.875rem}
+.rating-total{font-size:.75rem;color:var(--muted)}
+
+/* ── CONTACTO ── */
+.contacto-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:3.5rem;align-items:start}
+.contacto-info{display:flex;flex-direction:column;gap:0}
+.cinfo{
+  display:flex;gap:1.125rem;align-items:flex-start;
+  padding:1.375rem;background:var(--ink-3);border:1px solid var(--border);border-bottom:none;
+}
+.cinfo:first-child{border-radius:8px 8px 0 0}
+.cinfo:nth-child(4){border-radius:0 0 8px 8px;border-bottom:1px solid var(--border)}
+.cinfo-ico{
+  width:40px;height:40px;border-radius:50%;background:var(--red-dim);
+  border:1px solid rgba(200,16,46,.2);display:flex;align-items:center;justify-content:center;
+  font-size:1.125rem;flex-shrink:0;
+}
+.cinfo-body{display:flex;flex-direction:column;gap:.2rem}
+.cinfo-label{font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.cinfo-val{font-size:.9375rem;color:var(--cream);font-weight:300}
+.cinfo-val a{color:var(--gold);transition:color .2s}
+.cinfo-val a:hover{color:var(--cream)}
+.social-row{display:flex;gap:.75rem;margin-top:1.5rem;flex-wrap:wrap}
+.social-pill{
+  padding:.4rem 1.125rem;border:1px solid var(--border);border-radius:100px;
+  font-size:.75rem;color:var(--muted);transition:all .25s;letter-spacing:.05em;
+}
+.social-pill:hover{border-color:var(--red);color:var(--red)}
+.mapa-wrap{
+  border-radius:10px;overflow:hidden;border:1px solid var(--border);
+  height:400px;background:var(--ink-3);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:1rem;color:var(--muted);
+}
+.mapa-placeholder-icon{font-size:3rem;opacity:.3}
+.mapa-placeholder-text{font-size:.8125rem;text-align:center;line-height:1.6;max-width:200px;font-style:italic}
+.cta-reserva{
+  margin-top:2rem;padding:1.75rem 2rem;background:var(--red);border-radius:6px;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+}
+.cta-reserva-text h3{font-family:var(--f-ser);font-size:1.125rem;font-weight:700;color:#fff;margin-bottom:.25rem}
+.cta-reserva-text p{font-size:.8125rem;color:rgba(255,255,255,.65);font-weight:300}
+.cta-reserva-btn{
+  padding:.75rem 1.5rem;background:#fff;color:var(--red);
+  font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  border-radius:2px;white-space:nowrap;transition:background .2s;flex-shrink:0;
+}
+.cta-reserva-btn:hover{background:var(--cream)}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--ink);border-top:1px solid var(--border);
+  padding:3.5rem 0 2rem;position:relative;z-index:2;
+}
+.footer-top{
+  display:grid;grid-template-columns:1fr auto 1fr;gap:3rem;
+  align-items:start;padding-bottom:2.5rem;border-bottom:1px solid var(--border);margin-bottom:2rem;
+}
+.footer-logo{font-family:var(--f-disp);font-size:1.25rem;font-weight:700;letter-spacing:.3em;color:var(--cream)}
+.footer-logo small{display:block;font-size:.6rem;letter-spacing:.25em;color:var(--muted);margin-top:.25rem;font-weight:400}
+.footer-nav{display:flex;flex-direction:column;gap:.5rem;align-items:center}
+.footer-nav a{font-size:.8125rem;color:var(--muted);transition:color .2s;letter-spacing:.05em}
+.footer-nav a:hover{color:var(--red)}
+.footer-contact{display:flex;flex-direction:column;gap:.375rem;align-items:flex-end}
+.footer-contact a,.footer-contact span{font-size:.8125rem;color:var(--muted);transition:color .2s}
+.footer-contact a:hover{color:var(--gold)}
+.footer-bottom{text-align:center;font-size:.7rem;color:rgba(255,255,255,.18);letter-spacing:.05em}
+.footer-bottom span{color:var(--red);opacity:.7}
+
+/* ── WHATSAPP FLOTANTE ── */
+.wa-float{
+  position:fixed;bottom:2rem;right:2rem;z-index:500;
+  width:54px;height:54px;border-radius:50%;background:#25D366;color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 18px rgba(37,211,102,.4);
+  transition:transform .3s var(--ease),box-shadow .3s;
+  animation:waPop .5s var(--ease) 3s both;
+}
+.wa-float:hover{transform:scale(1.1) translateY(-2px);box-shadow:0 8px 26px rgba(37,211,102,.55)}
+@keyframes waPop{from{opacity:0;transform:scale(0.5)}to{opacity:1;transform:scale(1)}}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .estilos-grid{grid-template-columns:repeat(2,1fr)}
+  .artistas-grid{grid-template-columns:repeat(2,1fr)}
+  .galeria-grid{grid-template-columns:repeat(2,1fr)}
+  .gal-item:nth-child(4){grid-column:span 1;aspect-ratio:1}
+  .gal-item:nth-child(7){grid-column:span 1;aspect-ratio:1}
+  .filosofia-grid{grid-template-columns:1fr;gap:3.5rem}
+  .contacto-grid{grid-template-columns:1fr}
+  .mapa-wrap{height:280px}
+  .proceso-grid::before{display:none}
+}
+@media(max-width:768px){
+  .container{padding:0 1.25rem}
+  .section{padding:5rem 0}
+  #navbar{padding:1rem 1.25rem}
+  #navbar.scrolled{padding:.75rem 1.25rem}
+  .nav-links{display:none}
+  .nav-cta{display:none}
+  .burger{display:flex}
+  .nav-links.open{
+    display:flex;flex-direction:column;position:fixed;inset:0;
+    background:rgba(8,8,8,.98);align-items:center;justify-content:center;
+    gap:2rem;z-index:100;
+  }
+  .nav-links.open a{font-size:1.25rem;text-transform:none;letter-spacing:0}
+  .hero-content{padding:3rem 1.25rem 3rem}
+  .hero-circle-deco{display:none}
+  .hero-title{font-size:clamp(2.5rem,12vw,4rem)}
+  .hero-btns{flex-direction:column}
+  .hero-btns .btn-primary,.hero-btns .btn-ghost{width:100%;justify-content:center}
+  .hero-scroll-ind{display:none}
+  .estilos-grid{grid-template-columns:1fr}
+  .artistas-grid{grid-template-columns:1fr 1fr}
+  .galeria-grid{grid-template-columns:1fr 1fr}
+  .proceso-grid{grid-template-columns:1fr;gap:1.5rem}
+  .resenas-mini-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr;gap:2rem}
+  .footer-contact{align-items:flex-start}
+  .cta-reserva{flex-direction:column;text-align:center}
+  .stats-grid{grid-template-columns:1fr}
+  .stat-card.accent{grid-column:span 1}
+  .banner-note{display:none}
+  #banner{font-size:.7rem;gap:.75rem}
+}
+@media(max-width:480px){
+  .artistas-grid{grid-template-columns:1fr}
+  .galeria-grid{grid-template-columns:1fr}
+  .section-head h2{font-size:1.75rem}
+  .fil-title{font-size:1.75rem}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <p class="loader-name">NOIR INK</p>
+  <p class="loader-sub">Studio · Granada</p>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<!-- BANNER -->
+<div id="banner">
+  <span class="ban-dot"></span>
+  <span>Cita previa recomendada</span>
+  <a href="tel:+34600000000"><strong>[TU TELÉFONO]</strong></a>
+  <span class="banner-note">·&nbsp;Granada, España</span>
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    NOIR INK
+    <div class="nav-logo-line"></div>
+    <span>STUDIO</span>
+  </a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#estilos">Estilos</a></li>
+    <li><a href="#artistas">Artistas</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="#contacto" class="nav-cta">Reservar Cita</a>
+  <button class="burger" id="burger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <video class="hero-video" src="assets/hero.mp4" autoplay muted loop playsinline></video>
+  <div class="hero-video-overlay"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-circle-deco">
+    <div class="hero-flash">✦</div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Granada · Est. 2010</div>
+    <h1 class="hero-title">
+      El Arte<br>Grabado en<br><em>Tu Piel</em>
+    </h1>
+    <p class="hero-desc">
+      Estudio de tatuaje profesional en el corazón de Granada. Artistas especializados, atención personalizada y diseños únicos adaptados a tu visión.
+    </p>
+    <div class="hero-btns">
+      <a href="#contacto" class="btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
+        Reservar Consulta
+      </a>
+      <a href="#galeria" class="btn-ghost">Ver Portfolio →</a>
+    </div>
+  </div>
+  <div class="hero-scroll-ind">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-bar" aria-hidden="true">
+  <div class="marquee-track">
+    <span>REALISMO</span><span>·</span><span>BLACKWORK</span><span>·</span>
+    <span>NEO-TRADITIONAL</span><span>·</span><span>JAPONÉS</span><span>·</span>
+    <span>FINE LINE</span><span>·</span><span>ACUARELA</span><span>·</span>
+    <span>DOTWORK</span><span>·</span><span>NOIR INK STUDIO</span><span>·</span>
+    <span>REALISMO</span><span>·</span><span>BLACKWORK</span><span>·</span>
+    <span>NEO-TRADITIONAL</span><span>·</span><span>JAPONÉS</span><span>·</span>
+    <span>FINE LINE</span><span>·</span><span>ACUARELA</span><span>·</span>
+    <span>DOTWORK</span><span>·</span><span>NOIR INK STUDIO</span><span>·</span>
+  </div>
+</div>
+
+<!-- FILOSOFÍA -->
+<section id="filosofia" class="section section-dark">
+  <div class="container">
+    <div class="filosofia-grid">
+      <div class="reveal-left">
+        <span class="fil-tag">Nuestra Filosofía</span>
+        <h2 class="fil-title">Arte que permanece.<br><em>Trabajo que se siente.</em></h2>
+        <p class="fil-text">
+          Cada tatuaje es una historia. Desde la primera consulta hasta el retoque final, acompañamos a nuestros clientes en cada paso del proceso con honestidad, profesionalidad y una dedicación absoluta al detalle.
+        </p>
+        <p class="fil-text">
+          Trabajamos exclusivamente con tintas de alta gama, esterilización certificada y diseños 100% personalizados. No hacemos tatuajes de catálogo: hacemos <em>los tuyos</em>.
+        </p>
+        <blockquote class="fil-quote">
+          "La piel es el lienzo más honesto que existe. Merece el mejor arte."
+        </blockquote>
+        <a href="#artistas" class="btn-ghost" style="display:inline-flex">Conoce a los artistas →</a>
+      </div>
+      <div class="reveal-right">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-num" data-count="14">0</span>
+            <span class="stat-label">Años de estudio</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num" data-count="4">0</span>
+            <span class="stat-label">Artistas especializados</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num" data-count="3200" data-suffix="+">0</span>
+            <span class="stat-label">Tatuajes realizados</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num" data-count="4.9">0</span>
+            <span class="stat-label">Valoración Google ★</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ESTILOS -->
+<section id="estilos" class="section section-alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="tag">Especialidades</span>
+      <h2>Nuestros <em>Estilos</em></h2>
+      <p>Cada artista domina su disciplina. Encuentra el estilo que se adapta a tu visión.</p>
+    </div>
+    <div class="estilos-grid">
+      <div class="estilo-card reveal" style="transition-delay:.05s">
+        <span class="estilo-num">01</span>
+        <div class="estilo-icon">🎯</div>
+        <h3 class="estilo-name">Realismo</h3>
+        <p class="estilo-desc">Retratos fotorrealistas, naturaleza y texturas que engañan al ojo. La técnica más demandante y espectacular.</p>
+        <span class="estilo-link">Ver trabajos →</span>
+      </div>
+      <div class="estilo-card reveal" style="transition-delay:.1s">
+        <span class="estilo-num">02</span>
+        <div class="estilo-icon">◼</div>
+        <h3 class="estilo-name">Blackwork</h3>
+        <p class="estilo-desc">Tintas negras puras, geométricas, tribales o abstractas. Impacto visual máximo con elegancia atemporal.</p>
+        <span class="estilo-link">Ver trabajos →</span>
+      </div>
+      <div class="estilo-card reveal" style="transition-delay:.15s">
+        <span class="estilo-num">03</span>
+        <div class="estilo-icon">🌹</div>
+        <h3 class="estilo-name">Neo-Traditional</h3>
+        <p class="estilo-desc">La evolución del clásico. Colores vivos, líneas gruesas y composiciones dinámicas con espíritu moderno.</p>
+        <span class="estilo-link">Ver trabajos →</span>
+      </div>
+      <div class="estilo-card reveal" style="transition-delay:.2s">
+        <span class="estilo-num">04</span>
+        <div class="estilo-icon">🐉</div>
+        <h3 class="estilo-name">Japonés Tradicional</h3>
+        <p class="estilo-desc">Irezumi auténtico. Koi, dragones, flores de cerezo y olas Hokusai con rigor técnico y narrativa simbólica.</p>
+        <span class="estilo-link">Ver trabajos →</span>
+      </div>
+      <div class="estilo-card reveal" style="transition-delay:.25s">
+        <span class="estilo-num">05</span>
+        <div class="estilo-icon">✒</div>
+        <h3 class="estilo-name">Fine Line & Minimalismo</h3>
+        <p class="estilo-desc">Líneas ultra finas, delicadeza extrema. Para quienes buscan sutileza sin renunciar al impacto.</p>
+        <span class="estilo-link">Ver trabajos →</span>
+      </div>
+      <div class="estilo-card reveal" style="transition-delay:.3s">
+        <span class="estilo-num">06</span>
+        <div class="estilo-icon">🔷</div>
+        <h3 class="estilo-name">Geometría & Dotwork</h3>
+        <p class="estilo-desc">Mandalas, patrones sagrados y precisión matemática. Puntillismo meticuloso que hipnotiza de cerca.</p>
+        <span class="estilo-link">Ver trabajos →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARTISTAS -->
+<section id="artistas" class="section section-dark">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="tag">El Equipo</span>
+      <h2>Nuestros <em>Artistas</em></h2>
+      <p>Cuatro profesionales, cuatro visiones. Un mismo compromiso con la excelencia.</p>
+    </div>
+    <div class="artistas-grid">
+
+      <div class="artista-card reveal" style="transition-delay:.05s">
+        <div class="artista-foto" style="background:#111">
+          <img class="artista-img" src="assets/tatuador1.jpg" alt="Carlos Vega tatuador" loading="lazy">
+          <span class="artista-badge">Realismo</span>
+        </div>
+        <div class="artista-info">
+          <h3 class="artista-name">Carlos Vega</h3>
+          <p class="artista-spec">Realismo & Retrato</p>
+          <p class="artista-bio">Especialista en retratos fotorrealistas y naturaleza. Sus trabajos han sido publicados en revistas especializadas de tatuaje europeas.</p>
+          <div class="artista-exp">
+            <strong>[X]</strong> años de experiencia · @[instagram]
+          </div>
+        </div>
+      </div>
+
+      <div class="artista-card reveal" style="transition-delay:.1s">
+        <div class="artista-foto" style="background:#111">
+          <img class="artista-img" src="assets/tatuadora1.avif" alt="Lara Montoya tatuadora" loading="lazy">
+          <span class="artista-badge">Blackwork</span>
+        </div>
+        <div class="artista-info">
+          <h3 class="artista-name">Lara Montoya</h3>
+          <p class="artista-spec">Blackwork & Geometría</p>
+          <p class="artista-bio">Lineas negras puras y patrones geométricos de precisión absoluta. Con formación en diseño gráfico que se refleja en cada pieza.</p>
+          <div class="artista-exp">
+            <strong>[X]</strong> años de experiencia · @[instagram]
+          </div>
+        </div>
+      </div>
+
+      <div class="artista-card reveal" style="transition-delay:.15s">
+        <div class="artista-foto" style="background:#111">
+          <img class="artista-img" src="assets/tatuador2.jpg" alt="Pablo Ruiz tatuador" loading="lazy">
+          <span class="artista-badge">Neo-Trad</span>
+        </div>
+        <div class="artista-info">
+          <h3 class="artista-name">Pablo Ruiz</h3>
+          <p class="artista-spec">Neo-Traditional & Color</p>
+          <p class="artista-bio">Maestro del color y la composición. Sus piezas neo-traditional combinan la audacia clásica con una paleta cromática contemporánea.</p>
+          <div class="artista-exp">
+            <strong>[X]</strong> años de experiencia · @[instagram]
+          </div>
+        </div>
+      </div>
+
+      <div class="artista-card reveal" style="transition-delay:.2s">
+        <div class="artista-foto" style="background:#111">
+          <img class="artista-img" src="assets/tatuadora2.jpg" alt="Ana Soler tatuadora" loading="lazy">
+          <span class="artista-badge">Fine Line</span>
+        </div>
+        <div class="artista-info">
+          <h3 class="artista-name">Ana Soler</h3>
+          <p class="artista-spec">Fine Line & Japonés</p>
+          <p class="artista-bio">La delicadeza hecha arte. Especializada en fine line botánico y en la tradición irezumi japonesa, con un toque personal e íntimo.</p>
+          <div class="artista-exp">
+            <strong>[X]</strong> años de experiencia · @[instagram]
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section id="galeria" class="section section-alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="tag">Portfolio</span>
+      <h2>Nuestra <em>Galería</em></h2>
+      <p>Una muestra de trabajos realizados en el estudio. Cada pieza es única e irrepetible.</p>
+    </div>
+    <p class="gal-placeholder-note reveal" style="margin-bottom:1.5rem">
+      📸 Aquí se mostrarán las fotografías reales de los tatuajes del estudio. Sección diseñada para galería de alta resolución.
+    </p>
+    <div class="galeria-grid">
+      <!-- Fila 1: 3 celdas cuadradas — imágenes verticales funcionan bien -->
+      <div class="gal-item reveal" style="transition-delay:.05s">
+        <img class="gal-img" src="assets/tatuaje2.jpg" alt="Tatuaje realismo" loading="lazy">
+        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Realismo</span><span class="gal-artist">Carlos Vega</span></div></div>
+      </div>
+      <div class="gal-item reveal" style="transition-delay:.1s">
+        <img class="gal-img" src="assets/tatuaje3.jpg" alt="Tatuaje blackwork" loading="lazy">
+        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Blackwork</span><span class="gal-artist">Lara Montoya</span></div></div>
+      </div>
+      <div class="gal-item reveal" style="transition-delay:.15s">
+        <img class="gal-img" src="assets/tatuaje4.jpg" alt="Tatuaje fine line" loading="lazy">
+        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Fine Line</span><span class="gal-artist">Ana Soler</span></div></div>
+      </div>
+      <!-- Celda ancha (2 cols): imagen cuadrada 512×512 — se recorta mínimo -->
+      <div class="gal-item reveal" style="transition-delay:.2s">
+        <img class="gal-img" src="assets/tatuaje1.jpg" alt="Tatuaje neo-traditional" loading="lazy">
+        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Neo-Traditional</span><span class="gal-artist">Pablo Ruiz</span></div></div>
+      </div>
+      <div class="gal-item reveal" style="transition-delay:.25s">
+        <img class="gal-img" src="assets/tatuaje6.jpg" alt="Tatuaje japonés" loading="lazy">
+        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Japonés</span><span class="gal-artist">Ana Soler</span></div></div>
+      </div>
+      <!-- Fila 3: normal + celda ancha -->
+      <div class="gal-item reveal" style="transition-delay:.3s">
+        <img class="gal-img" src="assets/tatuaje8.jpg" alt="Tatuaje realismo retrato" loading="lazy">
+        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Realismo</span><span class="gal-artist">Carlos Vega</span></div></div>
+      </div>
+      <!-- Celda ancha (2 cols): imagen cuadrada 500×500 — se recorta mínimo -->
+      <div class="gal-item reveal" style="transition-delay:.35s">
+        <img class="gal-img" src="assets/tatuaje7.jpg" alt="Tatuaje geometría" loading="lazy">
+        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Geometría</span><span class="gal-artist">Lara Montoya</span></div></div>
+      </div>
+      <!-- Fila 4: 3 celdas — completa perfectamente el grid -->
+      <div class="gal-item reveal" style="transition-delay:.4s">
+        <img class="gal-img" src="assets/tatuaje9.jpg" alt="Tatuaje blackwork" loading="lazy">
+        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Blackwork</span><span class="gal-artist">Lara Montoya</span></div></div>
+      </div>
+      <div class="gal-item reveal" style="transition-delay:.45s">
+        <img class="gal-img" src="assets/tatuaje5.webp" alt="Tatuaje acuarela" loading="lazy">
+        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Acuarela</span><span class="gal-artist">Ana Soler</span></div></div>
+      </div>
+      <div class="gal-item reveal" style="transition-delay:.5s">
+        <img class="gal-img" src="assets/tatuaje10.jpg" alt="Tatuaje dotwork" loading="lazy">
+        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Dotwork</span><span class="gal-artist">Lara Montoya</span></div></div>
+      </div>
+    </div>
+    <div class="galeria-cta">
+      <a href="#contacto" class="btn-ghost">Ver portfolio completo en Instagram →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso" class="section section-dark">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="tag">Cómo Funciona</span>
+      <h2>El <em>Proceso</em></h2>
+      <p>Desde la idea hasta el resultado final. Sencillo, transparente y pensado para ti.</p>
+    </div>
+    <div class="proceso-grid">
+      <div class="paso-card reveal" style="transition-delay:.05s">
+        <div class="paso-num">01</div>
+        <span class="paso-icon">💬</span>
+        <h3 class="paso-titulo">Consulta Gratuita</h3>
+        <p class="paso-desc">Cuéntanos tu idea. Presupuesto sin compromiso, asesoramiento honesto sobre viabilidad, tamaño y colocación. En persona o por mensajes.</p>
+      </div>
+      <div class="paso-card reveal" style="transition-delay:.15s">
+        <div class="paso-num">02</div>
+        <span class="paso-icon">✏️</span>
+        <h3 class="paso-titulo">Diseño Personalizado</h3>
+        <p class="paso-desc">Tu artista crea el diseño a medida. Presentamos bocetos, hacemos revisiones hasta que estés 100% satisfecho. Tu visión, nuestra destreza.</p>
+      </div>
+      <div class="paso-card reveal" style="transition-delay:.25s">
+        <div class="paso-num">03</div>
+        <span class="paso-icon">🖋</span>
+        <h3 class="paso-titulo">Sesión & Resultado</h3>
+        <p class="paso-desc">Ambiente relajado, música a tu gusto y un resultado que te acompañará toda la vida. Incluimos instrucciones de cuidado y retoques gratuitos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="section section-alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="tag-gold tag">Preguntas Frecuentes</span>
+      <h2>Lo que todos <em>preguntan</em></h2>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-btn">
+          <span class="faq-q">¿Cuánto cuesta un tatuaje?</span>
+          <span class="faq-ico">+</span>
+        </button>
+        <div class="faq-body">
+          <p>El precio depende del tamaño, la complejidad y el tiempo de sesión. Tenemos un mínimo de [PRECIO MÍNIMO] por pieza. Realizamos presupuestos gratuitos y sin compromiso — escríbenos con tu idea y te informamos.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn">
+          <span class="faq-q">¿Cómo me preparo para la sesión?</span>
+          <span class="faq-ico">+</span>
+        </button>
+        <div class="faq-body">
+          <p>Come bien antes de venir, mantén la piel hidratada los días previos, evita el alcohol 24h antes y viste ropa cómoda que permita acceder fácilmente a la zona a tatuar. El resto lo ponemos nosotros.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn">
+          <span class="faq-q">¿Cuánto tarda en curar un tatuaje?</span>
+          <span class="faq-ico">+</span>
+        </button>
+        <div class="faq-body">
+          <p>La cicatrización superficial ocurre en 2-3 semanas. La curación completa tarda entre 2 y 4 meses. Te damos instrucciones detalladas de cuidado y estamos disponibles para resolver cualquier duda durante el proceso.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn">
+          <span class="faq-q">¿Hacéis retoques gratuitos?</span>
+          <span class="faq-ico">+</span>
+        </button>
+        <div class="faq-body">
+          <p>Sí. Todos nuestros tatuajes incluyen un retoque gratuito durante los primeros 3 meses, siempre que se hayan seguido las instrucciones de cuidado. Nuestra garantía de calidad es total.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn">
+          <span class="faq-q">¿Puedo traer mi propio diseño?</span>
+          <span class="faq-ico">+</span>
+        </button>
+        <div class="faq-body">
+          <p>Por supuesto. Podemos ejecutar tu diseño exacto o tomarlo como referencia y adaptarlo para que funcione mejor como tatuaje. Nunca copiamos diseños de otros artistas: cualquier referencia se reinterpreta con nuestra visión.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RESEÑAS (placeholder) -->
+<section id="resenas" class="section section-dark">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="tag">Valoraciones</span>
+      <h2>Lo que dicen <em>nuestros clientes</em></h2>
+      <div style="margin-top:1.25rem">
+        <div class="rating-badge">
+          <span class="rating-score">[X.X]</span>
+          <span class="rating-stars">★★★★★</span>
+          <span class="rating-total">[N] reseñas en Google</span>
+        </div>
+      </div>
+    </div>
+    <div class="resenas-nota reveal">
+      <p><strong>📌 Sección de reseñas reales</strong><br>Aquí se mostrarán las valoraciones reales de Google de tu estudio. Este diseño está listo para recibir tus reseñas.</p>
+    </div>
+    <div class="resenas-mini-grid reveal">
+      <div class="resena-mini">
+        <div class="resena-mini-stars">★★★★★</div>
+        <p class="resena-mini-text">"[Aquí irá la reseña real de un cliente. El espacio está diseñado para textos de hasta 3-4 líneas.]"</p>
+        <span class="resena-mini-autor">— [Nombre Cliente] · Hace [X] meses</span>
+      </div>
+      <div class="resena-mini">
+        <div class="resena-mini-stars">★★★★★</div>
+        <p class="resena-mini-text">"[Segunda reseña real. Ideal usar las más descriptivas y positivas de Google Maps.]"</p>
+        <span class="resena-mini-autor">— [Nombre Cliente] · Hace [X] meses</span>
+      </div>
+      <div class="resena-mini">
+        <div class="resena-mini-stars">★★★★★</div>
+        <p class="resena-mini-text">"[Tercera reseña. Se pueden añadir tantas como se quiera con el diseño de carousel.]"</p>
+        <span class="resena-mini-autor">— [Nombre Cliente] · Hace [X] meses</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="section section-alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="tag">Reservas & Contacto</span>
+      <h2>¿Listo para tu <em>próximo tatuaje?</em></h2>
+      <p>Cuéntanos tu idea. La primera consulta es gratuita y sin compromiso.</p>
+    </div>
+    <div class="contacto-grid">
+      <div class="reveal-left">
+        <div class="contacto-info">
+          <div class="cinfo">
+            <div class="cinfo-ico">📍</div>
+            <div class="cinfo-body">
+              <span class="cinfo-label">Dirección</span>
+              <span class="cinfo-val">[Tu Calle y Número]<br>Granada, España</span>
+            </div>
+          </div>
+          <div class="cinfo">
+            <div class="cinfo-ico">📞</div>
+            <div class="cinfo-body">
+              <span class="cinfo-label">Teléfono / WhatsApp</span>
+              <span class="cinfo-val"><a href="tel:+34600000000">[TU TELÉFONO]</a></span>
+            </div>
+          </div>
+          <div class="cinfo">
+            <div class="cinfo-ico">✉️</div>
+            <div class="cinfo-body">
+              <span class="cinfo-label">Email</span>
+              <span class="cinfo-val"><a href="mailto:info@noirinksudio.es">[TU EMAIL]</a></span>
+            </div>
+          </div>
+          <div class="cinfo">
+            <div class="cinfo-ico">🕐</div>
+            <div class="cinfo-body">
+              <span class="cinfo-label">Horario</span>
+              <span class="cinfo-val">Lun – Sáb: 11:00 – 20:00<br><small style="color:var(--muted);font-size:.8em">Con cita previa · Domingos cerrado</small></span>
+            </div>
+          </div>
+        </div>
+        <div class="social-row" style="margin-top:1.5rem">
+          <a href="#" class="social-pill">Instagram</a>
+          <a href="#" class="social-pill">Facebook</a>
+          <a href="#" class="social-pill">TikTok</a>
+          <a href="#" class="social-pill">Pinterest</a>
+        </div>
+        <div class="cta-reserva" style="margin-top:1.5rem">
+          <div class="cta-reserva-text">
+            <h3>¿Tienes una idea?</h3>
+            <p>Escríbenos por WhatsApp y te respondemos hoy</p>
+          </div>
+          <a href="https://wa.me/34600000000" class="cta-reserva-btn">WhatsApp →</a>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="mapa-wrap">
+          <div class="mapa-placeholder-icon">🗺</div>
+          <p class="mapa-placeholder-text">Aquí se incrustará el mapa de Google con la ubicación real del estudio</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">NOIR INK<small>STUDIO · GRANADA</small></div>
+      </div>
+      <nav class="footer-nav">
+        <a href="#estilos">Estilos</a>
+        <a href="#artistas">Artistas</a>
+        <a href="#galeria">Galería</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <div class="footer-contact">
+        <a href="tel:+34600000000">[TU TELÉFONO]</a>
+        <a href="mailto:info@estudio.es">[TU EMAIL]</a>
+        <span>[Tu Calle] · Granada</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 NOIR INK STUDIO · Todos los derechos reservados · <span>Diseño web personalizado</span></p>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP -->
+<a href="https://wa.me/34600000000" target="_blank" rel="noopener" class="wa-float" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.55 4.116 1.516 5.845L.057 23.743a.75.75 0 0 0 .913.906l5.998-1.44A11.935 11.935 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.853 0-3.593-.5-5.096-1.374l-.364-.214-3.78.907.924-3.671-.236-.378A9.944 9.944 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+</a>
+
+<script>
+/* =====================================================
+   NOIR INK STUDIO — JS
+   ===================================================== */
+
+/* ── LOADER ── */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const loader = document.getElementById('loader');
+    loader.style.transition = 'opacity .6s ease';
+    loader.style.opacity = '0';
+    setTimeout(() => loader.style.display = 'none', 600);
+  }, 1800);
+});
+
+/* ── NAVBAR ── */
+const navbar = document.getElementById('navbar');
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('nav-links');
+
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+burger.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  burger.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    burger.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+
+/* ── INTERSECTION OBSERVER: REVEAL ── */
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -48px 0px' });
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => revealObs.observe(el));
+
+/* Stagger para grids ── */
+document.querySelectorAll('.estilos-grid .estilo-card, .artistas-grid .artista-card, .galeria-grid .gal-item').forEach((el, i) => {
+  if (!el.style.transitionDelay) el.style.transitionDelay = (i * 0.07) + 's';
+  el.classList.add('reveal');
+  revealObs.observe(el);
+});
+
+/* ── COUNTER ANIMATION ── */
+function animateCount(el) {
+  const target  = parseFloat(el.dataset.count);
+  const suffix  = el.dataset.suffix || '';
+  const isFloat = !Number.isInteger(target);
+  const duration = 1800;
+  const start   = performance.now();
+
+  function step(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    const val = target * ease;
+    el.textContent = (isFloat ? val.toFixed(1) : Math.round(val)) + suffix;
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      animateCount(e.target);
+      counterObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('[data-count]').forEach(el => counterObs.observe(el));
+
+/* ── FAQ ACCORDION ── */
+document.querySelectorAll('.faq-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const body = item.querySelector('.faq-body');
+    const isOpen = item.classList.contains('open');
+
+    document.querySelectorAll('.faq-item.open').forEach(open => {
+      if (open !== item) {
+        open.classList.remove('open');
+        open.querySelector('.faq-body').style.maxHeight = '0';
+      }
+    });
+
+    if (isOpen) {
+      item.classList.remove('open');
+      body.style.maxHeight = '0';
+    } else {
+      item.classList.add('open');
+      body.style.maxHeight = body.scrollHeight + 'px';
+    }
+  });
+});
+
+/* ── SMOOTH ANCHOR SCROLL ── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href').slice(1);
+    const target = document.getElementById(id);
+    if (!target) return;
+    e.preventDefault();
+    const offset = document.getElementById('navbar').offsetHeight + 32;
+    window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>
