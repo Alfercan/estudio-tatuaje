@@ -1233,6 +1233,11 @@ const navLinks = document.getElementById('nav-links');
 
 window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 60);
+  if (navLinks.classList.contains('open')) {
+    navLinks.classList.remove('open');
+    burger.classList.remove('open');
+    document.body.style.overflow = '';
+  }
 }, { passive: true });
 
 burger.addEventListener('click', () => {
