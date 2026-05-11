@@ -3,14 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="NOIR INK STUDIO · Estudio de tatuaje profesional en Granada. Realismo, blackwork, neo-traditional, japonés. Artistas especializados, cita previa.">
-<title>NOIR INK STUDIO · Tatuajes en Granada</title>
+<meta name="description" content="Simbiosis Tattoo · Estudio de tatuaje profesional en Granada centro. Japonés, blackwork, fine line, realismo. Artistas especializados, cita previa.">
+<title>Simbiosis Tattoo · Estudio de Tatuaje en Granada</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"><style>
 /* =====================================================
-   NOIR INK STUDIO — CSS
+   SIMBIOSIS TATTOO — CSS
    ===================================================== */
 :root {
   --black:    #080808;
@@ -58,8 +57,7 @@ a{color:inherit;text-decoration:none}
   opacity:0;animation:fadeUp .8s var(--ease) .2s forwards;
 }
 .loader-logo{
-  height:90px;width:auto;object-fit:contain;
-  filter:brightness(0) invert(1);
+  height:140px;width:auto;object-fit:contain;
   opacity:0;animation:fadeUp .8s var(--ease) .2s forwards;
 }
 .loader-sub{
@@ -87,16 +85,32 @@ a{color:inherit;text-decoration:none}
 /* ── NAVBAR ── */
 #navbar{
   position:fixed;top:32px;left:0;right:0;z-index:100;
-  display:flex;align-items:center;justify-content:space-between;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
   padding:1.25rem 3rem;transition:background .4s,padding .4s,border-color .4s;
   border-bottom:1px solid transparent;
 }
+.nav-links{justify-self:center}
+.nav-cta{justify-self:end}
 #navbar.scrolled{
   background:rgba(8,8,8,.96);backdrop-filter:blur(16px);
   padding:.875rem 3rem;border-color:var(--border);
 }
-.nav-logo-img{height:42px;width:auto;object-fit:contain;filter:brightness(0) invert(1);transition:filter .3s;}
-#navbar.scrolled .nav-logo-img{filter:brightness(0) invert(1);}
+.nav-logo-img{height:58px;width:auto;object-fit:contain;}
+#navbar.scrolled .nav-logo-img{}
+.brand-name{
+  font-family:'Tattoo Ink',serif;
+  line-height:1.1;
+  display:flex;flex-direction:column;
+}
+.brand-name .b1{font-size:1.125rem;letter-spacing:.04em;color:var(--cream);}
+.brand-name .b2{font-size:.7rem;letter-spacing:.25em;color:var(--text-muted);text-transform:uppercase;}
+.loader-brand-name{
+  font-family:'Tattoo Ink',serif;
+  font-size:clamp(1.75rem,5vw,3rem);
+  color:var(--cream);letter-spacing:.05em;
+  opacity:0;animation:fadeUp .8s var(--ease) .5s forwards;
+  margin-top:.5rem;
+}
 .nav-logo{
   font-family:var(--f-disp);font-size:1.125rem;font-weight:700;
   letter-spacing:.3em;color:var(--cream);display:flex;align-items:center;gap:.875rem;
@@ -478,7 +492,7 @@ a{color:inherit;text-decoration:none}
 }
 .resenas-nota p{color:var(--muted);font-size:.875rem;font-weight:300;line-height:1.7}
 .resenas-nota strong{color:var(--red)}
-.resenas-mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;opacity:.6}
+.resenas-mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
 .resena-mini{
   background:var(--ink-2);border:1px solid var(--border);border-radius:8px;
   padding:1.5rem;display:flex;flex-direction:column;gap:.75rem;
@@ -551,7 +565,7 @@ footer{
   align-items:start;padding-bottom:2.5rem;border-bottom:1px solid var(--border);margin-bottom:2rem;
 }
 .footer-logo{font-family:var(--f-disp);font-size:1.25rem;font-weight:700;letter-spacing:.3em;color:var(--cream)}
-.footer-logo-img{height:56px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.85;}
+.footer-logo-img{height:80px;width:auto;object-fit:contain;}
 .footer-logo small{display:block;font-size:.6rem;letter-spacing:.25em;color:var(--muted);margin-top:.25rem;font-weight:400}
 .footer-nav{display:flex;flex-direction:column;gap:.5rem;align-items:center}
 .footer-nav a{font-size:.8125rem;color:var(--muted);transition:color .2s;letter-spacing:.05em}
@@ -640,7 +654,7 @@ footer{
 <div id="banner">
   <span class="ban-dot"></span>
   <span>Cita previa recomendada</span>
-  <a href="tel:+34600000000"><strong>[TU TELÉFONO]</strong></a>
+  <a href="tel:+34678066902"><strong>678 06 69 02</strong></a>
   <span class="banner-note">·&nbsp;Granada, España</span>
 </div>
 
@@ -654,9 +668,11 @@ footer{
     <li><a href="#artistas">Artistas</a></li>
     <li><a href="#galeria">Galería</a></li>
     <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#faq">FAQs</a></li>
+    <li><a href="#resenas">Reseñas</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
-  <a href="#contacto" class="nav-cta">Reservar Cita</a>
+  <a href="https://www.instagram.com/simbiosistattoo/" target="_blank" rel="noopener" class="nav-cta">Reservar Cita</a>
   <button class="burger" id="burger" aria-label="Menú">
     <span></span><span></span><span></span>
   </button>
@@ -667,11 +683,9 @@ footer{
   <video class="hero-video" src="assets/hero.mp4" autoplay muted loop playsinline></video>
   <div class="hero-video-overlay"></div>
   <div class="hero-glow"></div>
-  <div class="hero-circle-deco">
-    <div class="hero-flash">✦</div>
-  </div>
+
   <div class="hero-content">
-    <div class="hero-eyebrow">Granada · Est. 2010</div>
+    <div class="hero-eyebrow">Granada · Centro</div>
     <h1 class="hero-title">
       El Arte<br>Grabado en<br><em>Tu Piel</em>
     </h1>
@@ -679,7 +693,7 @@ footer{
       Estudio de tatuaje profesional en el corazón de Granada. Artistas especializados, atención personalizada y diseños únicos adaptados a tu visión.
     </p>
     <div class="hero-btns">
-      <a href="#contacto" class="btn-primary">
+      <a href="https://www.instagram.com/simbiosistattoo/" target="_blank" rel="noopener" class="btn-primary">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
         Reservar Consulta
       </a>
@@ -698,11 +712,11 @@ footer{
     <span>REALISMO</span><span>·</span><span>BLACKWORK</span><span>·</span>
     <span>NEO-TRADITIONAL</span><span>·</span><span>JAPONÉS</span><span>·</span>
     <span>FINE LINE</span><span>·</span><span>ACUARELA</span><span>·</span>
-    <span>DOTWORK</span><span>·</span><span>NOIR INK STUDIO</span><span>·</span>
+    <span>DOTWORK</span><span>·</span><span>SIMBIOSIS TATTOO</span><span>·</span>
     <span>REALISMO</span><span>·</span><span>BLACKWORK</span><span>·</span>
     <span>NEO-TRADITIONAL</span><span>·</span><span>JAPONÉS</span><span>·</span>
     <span>FINE LINE</span><span>·</span><span>ACUARELA</span><span>·</span>
-    <span>DOTWORK</span><span>·</span><span>NOIR INK STUDIO</span><span>·</span>
+    <span>DOTWORK</span><span>·</span><span>SIMBIOSIS TATTOO</span><span>·</span>
   </div>
 </div>
 
@@ -727,20 +741,20 @@ footer{
       <div class="reveal-right">
         <div class="stats-grid">
           <div class="stat-card">
-            <span class="stat-num" data-count="14">0</span>
-            <span class="stat-label">Años de estudio</span>
+            <span class="stat-num" data-count="9">0</span>
+            <span class="stat-label">Artistas residentes</span>
           </div>
           <div class="stat-card">
-            <span class="stat-num" data-count="4">0</span>
-            <span class="stat-label">Artistas especializados</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-num" data-count="3200" data-suffix="+">0</span>
-            <span class="stat-label">Tatuajes realizados</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-num" data-count="4.9">0</span>
+            <span class="stat-num" data-count="5">0</span>
             <span class="stat-label">Valoración Google ★</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num" data-count="159" data-suffix="+">0</span>
+            <span class="stat-label">Reseñas verificadas</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num" data-count="7">0</span>
+            <span class="stat-label">Estilos de tatuaje</span>
           </div>
         </div>
       </div>
@@ -809,67 +823,59 @@ footer{
     <div class="section-head reveal">
       <span class="tag">El Equipo</span>
       <h2>Nuestros <em>Artistas</em></h2>
-      <p>Cuatro profesionales, cuatro visiones. Un mismo compromiso con la excelencia.</p>
+      <p>Nueve artistas residentes, múltiples visiones. Un mismo compromiso con la excelencia.</p>
     </div>
     <div class="artistas-grid">
 
       <div class="artista-card reveal" style="transition-delay:.05s">
         <div class="artista-foto" style="background:#111">
-          <img class="artista-img" src="assets/tatuador1.jpg" alt="Carlos Vega tatuador" loading="lazy">
-          <span class="artista-badge">Realismo</span>
+          <img class="artista-img" src="assets/tatuador1.jpg" alt="Sergio Vicaire tatuador" loading="lazy">
+          <span class="artista-badge">Japonés</span>
         </div>
         <div class="artista-info">
-          <h3 class="artista-name">Carlos Vega</h3>
-          <p class="artista-spec">Realismo & Retrato</p>
-          <p class="artista-bio">Especialista en retratos fotorrealistas y naturaleza. Sus trabajos han sido publicados en revistas especializadas de tatuaje europeas.</p>
-          <div class="artista-exp">
-            <strong>[X]</strong> años de experiencia · @[instagram]
-          </div>
+          <h3 class="artista-name">Sergio Vicaire</h3>
+          <p class="artista-spec">Japonés & Old School</p>
+          <p class="artista-bio">Especialista en irezumi tradicional japonés y old school. Sus composiciones combinan narrativa simbólica con una técnica impecable.</p>
+          <div class="artista-exp">Simbiosis Tattoo · Granada</div>
         </div>
       </div>
 
       <div class="artista-card reveal" style="transition-delay:.1s">
         <div class="artista-foto" style="background:#111">
-          <img class="artista-img" src="assets/tatuadora1.avif" alt="Lara Montoya tatuadora" loading="lazy">
+          <img class="artista-img" src="assets/tatuadora1.avif" alt="Osho tatuador" loading="lazy">
           <span class="artista-badge">Blackwork</span>
         </div>
         <div class="artista-info">
-          <h3 class="artista-name">Lara Montoya</h3>
-          <p class="artista-spec">Blackwork & Geometría</p>
-          <p class="artista-bio">Lineas negras puras y patrones geométricos de precisión absoluta. Con formación en diseño gráfico que se refleja en cada pieza.</p>
-          <div class="artista-exp">
-            <strong>[X]</strong> años de experiencia · @[instagram]
-          </div>
+          <h3 class="artista-name">Osho</h3>
+          <p class="artista-spec">Blackwork & Dotwork</p>
+          <p class="artista-bio">Líneas negras puras, geometría y puntillismo de precisión. Cada pieza es un ejercicio de equilibrio entre la fuerza visual y la elegancia.</p>
+          <div class="artista-exp">Simbiosis Tattoo · Granada</div>
         </div>
       </div>
 
       <div class="artista-card reveal" style="transition-delay:.15s">
         <div class="artista-foto" style="background:#111">
-          <img class="artista-img" src="assets/tatuador2.jpg" alt="Pablo Ruiz tatuador" loading="lazy">
-          <span class="artista-badge">Neo-Trad</span>
+          <img class="artista-img" src="assets/tatuador2.jpg" alt="Jey Santt tatuador" loading="lazy">
+          <span class="artista-badge">Fine Line</span>
         </div>
         <div class="artista-info">
-          <h3 class="artista-name">Pablo Ruiz</h3>
-          <p class="artista-spec">Neo-Traditional & Color</p>
-          <p class="artista-bio">Maestro del color y la composición. Sus piezas neo-traditional combinan la audacia clásica con una paleta cromática contemporánea.</p>
-          <div class="artista-exp">
-            <strong>[X]</strong> años de experiencia · @[instagram]
-          </div>
+          <h3 class="artista-name">Jey Santt</h3>
+          <p class="artista-spec">Fine Line & Minimalismo</p>
+          <p class="artista-bio">Líneas ultra finas y diseños minimalistas con un trazo preciso y delicado. Ideal para quienes buscan sutileza con máximo impacto.</p>
+          <div class="artista-exp">Simbiosis Tattoo · Granada</div>
         </div>
       </div>
 
       <div class="artista-card reveal" style="transition-delay:.2s">
         <div class="artista-foto" style="background:#111">
-          <img class="artista-img" src="assets/tatuadora2.jpg" alt="Ana Soler tatuadora" loading="lazy">
-          <span class="artista-badge">Fine Line</span>
+          <img class="artista-img" src="assets/tatuadora2.jpg" alt="Andrea Capela tatuadora" loading="lazy">
+          <span class="artista-badge">Realismo</span>
         </div>
         <div class="artista-info">
-          <h3 class="artista-name">Ana Soler</h3>
-          <p class="artista-spec">Fine Line & Japonés</p>
-          <p class="artista-bio">La delicadeza hecha arte. Especializada en fine line botánico y en la tradición irezumi japonesa, con un toque personal e íntimo.</p>
-          <div class="artista-exp">
-            <strong>[X]</strong> años de experiencia · @[instagram]
-          </div>
+          <h3 class="artista-name">Andrea Capela</h3>
+          <p class="artista-spec">Realismo & Ilustrativo</p>
+          <p class="artista-bio">Retratos fotorrealistas e ilustraciones de alta complejidad. Cada trabajo es una pieza única que combina técnica y sensibilidad artística.</p>
+          <div class="artista-exp">Simbiosis Tattoo · Granada</div>
         </div>
       </div>
 
@@ -892,51 +898,51 @@ footer{
       <!-- Fila 1: 3 celdas cuadradas — imágenes verticales funcionan bien -->
       <div class="gal-item reveal" style="transition-delay:.05s">
         <img class="gal-img" src="assets/tatuaje2.jpg" alt="Tatuaje realismo" loading="lazy">
-        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Realismo</span><span class="gal-artist">Carlos Vega</span></div></div>
+        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Realismo</span><span class="gal-artist">Sergio Vicaire</span></div></div>
       </div>
       <div class="gal-item reveal" style="transition-delay:.1s">
         <img class="gal-img" src="assets/tatuaje3.jpg" alt="Tatuaje blackwork" loading="lazy">
-        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Blackwork</span><span class="gal-artist">Lara Montoya</span></div></div>
+        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Blackwork</span><span class="gal-artist">Osho</span></div></div>
       </div>
       <div class="gal-item reveal" style="transition-delay:.15s">
         <img class="gal-img" src="assets/tatuaje4.jpg" alt="Tatuaje fine line" loading="lazy">
-        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Fine Line</span><span class="gal-artist">Ana Soler</span></div></div>
+        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Fine Line</span><span class="gal-artist">Andrea Capela</span></div></div>
       </div>
       <!-- Celda ancha (2 cols): imagen cuadrada 512×512 — se recorta mínimo -->
       <div class="gal-item reveal" style="transition-delay:.2s">
         <img class="gal-img" src="assets/tatuaje1.jpg" alt="Tatuaje neo-traditional" loading="lazy">
-        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Neo-Traditional</span><span class="gal-artist">Pablo Ruiz</span></div></div>
+        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Neo-Traditional</span><span class="gal-artist">Jey Santt</span></div></div>
       </div>
       <div class="gal-item reveal" style="transition-delay:.25s">
         <img class="gal-img" src="assets/tatuaje6.jpg" alt="Tatuaje japonés" loading="lazy">
-        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Japonés</span><span class="gal-artist">Ana Soler</span></div></div>
+        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Japonés</span><span class="gal-artist">Andrea Capela</span></div></div>
       </div>
       <!-- Fila 3: normal + celda ancha -->
       <div class="gal-item reveal" style="transition-delay:.3s">
         <img class="gal-img" src="assets/tatuaje8.jpg" alt="Tatuaje realismo retrato" loading="lazy">
-        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Realismo</span><span class="gal-artist">Carlos Vega</span></div></div>
+        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Realismo</span><span class="gal-artist">Sergio Vicaire</span></div></div>
       </div>
       <!-- Celda ancha (2 cols): imagen cuadrada 500×500 — se recorta mínimo -->
       <div class="gal-item reveal" style="transition-delay:.35s">
         <img class="gal-img" src="assets/tatuaje7.jpg" alt="Tatuaje geometría" loading="lazy">
-        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Geometría</span><span class="gal-artist">Lara Montoya</span></div></div>
+        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Geometría</span><span class="gal-artist">Osho</span></div></div>
       </div>
       <!-- Fila 4: 3 celdas — completa perfectamente el grid -->
       <div class="gal-item reveal" style="transition-delay:.4s">
         <img class="gal-img" src="assets/tatuaje9.jpg" alt="Tatuaje blackwork" loading="lazy">
-        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Blackwork</span><span class="gal-artist">Lara Montoya</span></div></div>
+        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Blackwork</span><span class="gal-artist">Osho</span></div></div>
       </div>
       <div class="gal-item reveal" style="transition-delay:.45s">
         <img class="gal-img" src="assets/tatuaje5.webp" alt="Tatuaje acuarela" loading="lazy">
-        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Acuarela</span><span class="gal-artist">Ana Soler</span></div></div>
+        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Acuarela</span><span class="gal-artist">Andrea Capela</span></div></div>
       </div>
       <div class="gal-item reveal" style="transition-delay:.5s">
         <img class="gal-img" src="assets/tatuaje10.jpg" alt="Tatuaje dotwork" loading="lazy">
-        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Dotwork</span><span class="gal-artist">Lara Montoya</span></div></div>
+        <div class="gal-overlay"><div class="gal-info"><span class="gal-style">Dotwork</span><span class="gal-artist">Osho</span></div></div>
       </div>
     </div>
     <div class="galeria-cta">
-      <a href="#contacto" class="btn-ghost">Ver portfolio completo en Instagram →</a>
+      <a href="https://www.instagram.com/simbiosistattoo/" target="_blank" rel="noopener" class="btn-ghost">Ver portfolio completo en Instagram →</a>
     </div>
   </div>
 </section>
@@ -987,7 +993,7 @@ footer{
           <span class="faq-ico">+</span>
         </button>
         <div class="faq-body">
-          <p>El precio depende del tamaño, la complejidad y el tiempo de sesión. Tenemos un mínimo de [PRECIO MÍNIMO] por pieza. Realizamos presupuestos gratuitos y sin compromiso — escríbenos con tu idea y te informamos.</p>
+          <p>El precio depende del tamaño, la complejidad y el tiempo de sesión. Realizamos presupuestos gratuitos y sin compromiso — escríbenos con tu idea por WhatsApp o pásate al estudio y te informamos.</p>
         </div>
       </div>
 
@@ -1043,31 +1049,46 @@ footer{
       <h2>Lo que dicen <em>nuestros clientes</em></h2>
       <div style="margin-top:1.25rem">
         <div class="rating-badge">
-          <span class="rating-score">[X.X]</span>
+          <span class="rating-score">5.0</span>
           <span class="rating-stars">★★★★★</span>
-          <span class="rating-total">[N] reseñas en Google</span>
+          <span class="rating-total">159 reseñas en Google</span>
         </div>
       </div>
-    </div>
-    <div class="resenas-nota reveal">
-      <p><strong>📌 Sección de reseñas reales</strong><br>Aquí se mostrarán las valoraciones reales de Google de tu estudio. Este diseño está listo para recibir tus reseñas.</p>
     </div>
     <div class="resenas-mini-grid reveal">
       <div class="resena-mini">
         <div class="resena-mini-stars">★★★★★</div>
-        <p class="resena-mini-text">"[Aquí irá la reseña real de un cliente. El espacio está diseñado para textos de hasta 3-4 líneas.]"</p>
-        <span class="resena-mini-autor">— [Nombre Cliente] · Hace [X] meses</span>
+        <p class="resena-mini-text">"El estudio una pasada y mi experiencia con Sergio increíble. Un tatuador tradicional japonés de locos y una persona increíble, se ve que ama su profesión. Seguiré mucho tiempo haciéndome piezas con él."</p>
+        <span class="resena-mini-autor">— Rafael Hidalgo · Google</span>
       </div>
       <div class="resena-mini">
         <div class="resena-mini-stars">★★★★★</div>
-        <p class="resena-mini-text">"[Segunda reseña real. Ideal usar las más descriptivas y positivas de Google Maps.]"</p>
-        <span class="resena-mini-autor">— [Nombre Cliente] · Hace [X] meses</span>
+        <p class="resena-mini-text">"Sergio y su equipo me han tratado genial desde el momento de la reserva, aportando ideas y diseños, hasta el mismo día del tatuaje. Ha quedado una pieza excepcional."</p>
+        <span class="resena-mini-autor">— Joel C. · Google</span>
       </div>
       <div class="resena-mini">
         <div class="resena-mini-stars">★★★★★</div>
-        <p class="resena-mini-text">"[Tercera reseña. Se pueden añadir tantas como se quiera con el diseño de carousel.]"</p>
-        <span class="resena-mini-autor">— [Nombre Cliente] · Hace [X] meses</span>
+        <p class="resena-mini-text">"Llevo unos años haciéndome los piercings con Sara y es súper profesional además de ser un amor. Trabaja rápido y de forma bastante indolora. Recomendadísima."</p>
+        <span class="resena-mini-autor">— Rocío Vargas · Google</span>
       </div>
+      <div class="resena-mini">
+        <div class="resena-mini-stars">★★★★★</div>
+        <p class="resena-mini-text">"Me tatué con Andrea y no puedo estar más contenta. Fue súper cuidadosa, atenta y con un trato muy dulce. El tatuaje ha cicatrizado genial y se ha convertido en mi tatuadora sin duda."</p>
+        <span class="resena-mini-autor">— Marina Sanchez · Google</span>
+      </div>
+      <div class="resena-mini">
+        <div class="resena-mini-stars">★★★★★</div>
+        <p class="resena-mini-text">"Un servicio excelente, todos los miembros de Simbiosis Tattoo son unos grandes profesionales. Tanto para piezas propias como para tus ideas te asesoran de la mejor forma posible."</p>
+        <span class="resena-mini-autor">— Alejandro Roldán · Google</span>
+      </div>
+      <div class="resena-mini">
+        <div class="resena-mini-stars">★★★★★</div>
+        <p class="resena-mini-text">"Me he tatuado con Carlos (Mal Bicho) y estoy contentísima con el resultado. Sabe entender exactamente lo que buscas. Hacen un trabajazo y todos son muy agradables."</p>
+        <span class="resena-mini-autor">— Lidia María · Google</span>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem">
+      <a href="https://www.google.com/maps/search/Simbiosis+Tattoo+C.+Rector+López+Argüeta+7+Granada" target="_blank" rel="noopener" class="btn-ghost">Ver todas las reseñas en Google →</a>
     </div>
   </div>
 </section>
@@ -1087,49 +1108,39 @@ footer{
             <div class="cinfo-ico">📍</div>
             <div class="cinfo-body">
               <span class="cinfo-label">Dirección</span>
-              <span class="cinfo-val">[Tu Calle y Número]<br>Granada, España</span>
+              <span class="cinfo-val">C. Rector López Argüeta, 7, Local 1<br>18001 Granada, España</span>
             </div>
           </div>
           <div class="cinfo">
             <div class="cinfo-ico">📞</div>
             <div class="cinfo-body">
               <span class="cinfo-label">Teléfono / WhatsApp</span>
-              <span class="cinfo-val"><a href="tel:+34600000000">[TU TELÉFONO]</a></span>
-            </div>
-          </div>
-          <div class="cinfo">
-            <div class="cinfo-ico">✉️</div>
-            <div class="cinfo-body">
-              <span class="cinfo-label">Email</span>
-              <span class="cinfo-val"><a href="mailto:info@noirinksudio.es">[TU EMAIL]</a></span>
+              <span class="cinfo-val"><a href="tel:+34678066902">+34 678 06 69 02</a></span>
             </div>
           </div>
           <div class="cinfo">
             <div class="cinfo-ico">🕐</div>
             <div class="cinfo-body">
               <span class="cinfo-label">Horario</span>
-              <span class="cinfo-val">Lun – Sáb: 11:00 – 20:00<br><small style="color:var(--muted);font-size:.8em">Con cita previa · Domingos cerrado</small></span>
+              <span class="cinfo-val">Lun: 16:30–20:00<br>Mar–Vie: 11:00–14:00 y 16:30–20:00<br>Sáb: 11:00–14:00<br><small style="color:var(--muted);font-size:.8em">Domingos cerrado · Cita previa</small></span>
             </div>
           </div>
         </div>
         <div class="social-row" style="margin-top:1.5rem">
-          <a href="#" class="social-pill">Instagram</a>
-          <a href="#" class="social-pill">Facebook</a>
-          <a href="#" class="social-pill">TikTok</a>
-          <a href="#" class="social-pill">Pinterest</a>
+          <a href="https://www.instagram.com/simbiosistattoo/" target="_blank" rel="noopener" class="social-pill">Instagram</a>
+          <a href="https://www.facebook.com/simbiosistattoo/" target="_blank" rel="noopener" class="social-pill">Facebook</a>
         </div>
         <div class="cta-reserva" style="margin-top:1.5rem">
           <div class="cta-reserva-text">
             <h3>¿Tienes una idea?</h3>
             <p>Escríbenos por WhatsApp y te respondemos hoy</p>
           </div>
-          <a href="https://wa.me/34600000000" class="cta-reserva-btn">WhatsApp →</a>
+          <a href="https://wa.me/34678066902" class="cta-reserva-btn">WhatsApp →</a>
         </div>
       </div>
       <div class="reveal-right">
-        <div class="mapa-wrap">
-          <div class="mapa-placeholder-icon">🗺</div>
-          <p class="mapa-placeholder-text">Aquí se incrustará el mapa de Google con la ubicación real del estudio</p>
+        <div class="mapa-wrap" style="padding:0;overflow:hidden;border-radius:12px;height:380px">
+          <iframe src="https://maps.google.com/maps?q=C.+Rector+López+Argüeta,+7,+Granada&output=embed&z=16" width="100%" height="100%" style="border:0;display:block" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
     </div>
@@ -1151,25 +1162,25 @@ footer{
         <a href="#contacto">Contacto</a>
       </nav>
       <div class="footer-contact">
-        <a href="tel:+34600000000">[TU TELÉFONO]</a>
-        <a href="mailto:info@estudio.es">[TU EMAIL]</a>
-        <span>[Tu Calle] · Granada</span>
+        <a href="tel:+34678066902">+34 678 06 69 02</a>
+        <a href="https://www.instagram.com/simbiosistattoo/" target="_blank" rel="noopener">@simbiosistattoo</a>
+        <span>C. Rector López Argüeta, 7 · Granada</span>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2025 NOIR INK STUDIO · Todos los derechos reservados · <span>Diseño web personalizado</span></p>
+      <p>© 2025 Simbiosis Tattoo · Granada · Todos los derechos reservados</p>
     </div>
   </div>
 </footer>
 
 <!-- WHATSAPP -->
-<a href="https://wa.me/34600000000" target="_blank" rel="noopener" class="wa-float" aria-label="WhatsApp">
+<a href="https://wa.me/34678066902" target="_blank" rel="noopener" class="wa-float" aria-label="WhatsApp">
   <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.55 4.116 1.516 5.845L.057 23.743a.75.75 0 0 0 .913.906l5.998-1.44A11.935 11.935 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.853 0-3.593-.5-5.096-1.374l-.364-.214-3.78.907.924-3.671-.236-.378A9.944 9.944 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
 </a>
 
 <script>
 /* =====================================================
-   NOIR INK STUDIO — JS
+   SIMBIOSIS TATTOO — JS
    ===================================================== */
 
 /* ── LOADER ── */
