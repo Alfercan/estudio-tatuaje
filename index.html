@@ -1231,27 +1231,29 @@ const navbar = document.getElementById('navbar');
 const burger = document.getElementById('burger');
 const navLinks = document.getElementById('nav-links');
 
+function closeMenu() {
+  navLinks.classList.remove('open');
+  burger.classList.remove('open');
+  document.body.style.overflow = '';
+  navbar.style.zIndex = '';
+  navbar.style.top = '';
+}
+
 window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 60);
-  if (navLinks.classList.contains('open')) {
-    navLinks.classList.remove('open');
-    burger.classList.remove('open');
-    document.body.style.overflow = '';
-  }
+  if (navLinks.classList.contains('open')) closeMenu();
 }, { passive: true });
 
 burger.addEventListener('click', () => {
   const open = navLinks.classList.toggle('open');
   burger.classList.toggle('open', open);
   document.body.style.overflow = open ? 'hidden' : '';
+  navbar.style.zIndex = open ? '9999' : '';
+  navbar.style.top = open ? '0' : '';
 });
 
 navLinks.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    burger.classList.remove('open');
-    document.body.style.overflow = '';
-  });
+  a.addEventListener('click', closeMenu);
 });
 
 /* ── INTERSECTION OBSERVER: REVEAL ── */
